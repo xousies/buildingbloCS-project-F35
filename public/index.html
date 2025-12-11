@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MissingLink – Missing Persons</title>
-  <link rel="stylesheet" href="./public/css/styles.css" />
+  <title>MissingLink – Missing Persons List</title>
 
-  <script src="./public/js/view.js" defer></script>
+  <!-- IMPORTANT: no /public prefix -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- JS to load and render cards -->
+  <script src="js/view.js" defer></script>
+  <!-- If you have a separate delete.js you can include it too -->
+  <!-- <script src="js/delete.js" defer></script> -->
 </head>
 
 <body>
+  <!-- TOP NAV -->
   <header class="top-nav">
     <div class="nav-left">
       <div class="logo-circle"></div>
@@ -25,14 +31,15 @@
     </div>
   </header>
 
+  <!-- PAGE HEADER -->
   <main>
     <section class="header">
       <h1 class="page-title">MISSING PERSONS LIST</h1>
+      <p>Centralised records to help track and share information about missing persons.</p>
     </section>
 
-    <section class="cards-grid" id="cardsGrid">
-    </section>
+    <!-- CARDS RENDERED BY view.js -->
+    <section class="cards-grid" id="cardsGrid"></section>
   </main>
-
 </body>
 </html>

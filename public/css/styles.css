@@ -194,10 +194,10 @@ main {
 }
 
 /* ===========================
-   PERSON CARD (reuses .pet-* names)
+   PERSON CARD
    =========================== */
 
-.pet-card {
+.person-card {
   background-color: var(--bg-card);
   border-radius: 18px;
   padding: 14px 14px 12px;
@@ -209,13 +209,13 @@ main {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-.pet-card:hover {
+.person-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
   border-color: var(--primary-soft);
 }
 
-.pet-image-placeholder {
+.person-image-wrapper {
   width: 100%;
   height: 190px;
   border-radius: 14px;
@@ -226,29 +226,29 @@ main {
   overflow: hidden;
 }
 
-.pet-image-placeholder img {
+.person-image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.pet-info {
+.person-info {
   padding: 6px 4px;
   text-align: left;
 }
 
-.pet-name {
+.person-name {
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.pet-info p {
+.person-info p {
   margin-bottom: 3px;
   font-size: 0.9rem;
 }
 
-.pet-info p strong {
+.person-info p strong {
   font-weight: 600;
 }
 
@@ -537,4 +537,131 @@ main {
     font-size: 1.3rem;
     letter-spacing: 0.18em;
   }
+}
+
+.update-header {
+  max-width: 1100px;
+  margin: 24px auto 0;
+  padding: 12px 24px 24px;
+  text-align: left;
+}
+
+.page-title.page-title-update {
+  font-size: 2.1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+  margin-bottom: 6px;
+}
+
+.update-subtitle {
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+
+
+.update-main {
+  max-width: 1100px;
+  margin: 12px auto 64px;
+  padding: 0 24px 32px;
+}
+
+.form-section {
+  background-color: var(--bg-card);
+  border-radius: 18px;
+  padding: 20px 24px 22px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.basic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px 20px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.9rem;
+  outline: none;
+  background-color: #f9fafb;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.45);
+  background-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.form-field textarea {
+  min-height: 90px;
+}
+
+.update-main .button-row {
+  margin-top: 24px;
+}
+
+
+body {
+  background-color: var(--bg-soft);
+}
+
+.status-badge.status-missing {
+  color: #991b1b;
+  background-color: var(--bg-badge-missing);
+}
+
+.status-badge.status-found {
+  color: #166534;
+  background-color: var(--bg-badge-found);
+}
+
+/* IMAGE UPLOAD BOX */
+.image-upload-box {
+    width: 100%;
+    max-width: 380px;       /* 🔥 smaller & cleaner size */
+    height: 260px;          /* 🔥 reduced height */
+    border-radius: 14px;
+    background: #e5e7eb;
+    border: 2px dashed #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6b7280;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease;
+    margin: 0 auto;
+}
+
+.image-upload-box:hover {
+    border-color: #2563eb;
+    background: #f8fafc;
+}
+
+.upload-placeholder {
+    font-size: 0.9rem;
+    padding: 0 12px;
+    line-height: 1.4;
+}
+
+/* When image is loaded */
+.image-upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
 }

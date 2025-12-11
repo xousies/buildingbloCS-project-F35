@@ -13,36 +13,51 @@ function viewPersons() {
         for (var i = 0; i < response.length; i++) {
             var person = response[i];
 
+            // fallback image if no photo
             var imageSrc = person.photoBase64 || "images/default-person.png";
 
+            // decide status text + class (red for Missing, green for Found)
+            var statusText = person.status || "Missing";
+            var statusClass =
+                statusText === "Found"
+                    ? "status-badge status-found"
+                    : "status-badge status-missing";
+
             html +=
-                '<article class="pet-card">' +
-                    '<div class="pet-image-placeholder">' +
-                        '<img src="' + imageSrc + '" alt="Photo of ' + (person.name || "Missing Person") + '" class="pet-image" />' +
+                '<article class="person-card">' +
+                    '<div class="person-image-wrapper">' +
+                        '<img src="' + imageSrc + '" alt="Photo of ' +
+                          (person.name || "Missing Person") + '" />' +
                     '</div>' +
 
-                    '<div class="pet-info">' +
-                        '<h2 class="pet-name">' + (person.name || '-') + '</h2>' +
-
+                    '<div class="person-info">' +
+                        '<h2 class="person-name">' + (person.name || '-') + '</h2>' +
                         '<p><strong>Age:</strong> ' + (person.age || '-') + '</p>' +
                         '<p><strong>Gender:</strong> ' + (person.gender || '-') + '</p>' +
                         '<p><strong>Last Seen:</strong> ' + (person.lastSeen || '-') + '</p>' +
-                        '<p class="posted-date">Missing Since: ' + (person.dateMissing || '-') + '</p>' +
+                        '<p class="posted-date">Missing Since: ' +
+                            (person.dateMissing || '-') + '</p>' +
                     '</div>' +
 
                     '<div class="posted-date">' +
-                        'Status: <span class="status-badge">' + (person.status || "Missing") + '</span>' +
+                        'Status: <span class="' + statusClass + '">' +
+                            statusText +
+                        '</span>' +
                     '</div>' +
 
                     '<div class="card-actions">' +
-                        '<button class="btn-update" data-id="' + person.id + '">View / Edit</button>' +
-                        '<button class="btn-delete" onclick="deletePerson(\'' + person.id + '\')">Delete</button>' +
+                        // go straight to update page with id in query string
+                        '<button class="btn-update" ' +
+                            'onclick="window.location.href=\'update_person.html?id=' +
+                            person.id + '\'">View / Edit</button>' +
+                        '<button class="btn-delete" ' +
+                            'onclick="deletePerson(\'' + person.id + '\')">Delete</button>' +
                     '</div>' +
                 '</article>';
         }
 
         if (html === "") {
-            html = "<p>No missing persons found.</p>";
+            html = "<p style='color:#e5e7eb;text-align:center;'>No missing persons found.</p>";
         }
 
         document.getElementById("cardsGrid").innerHTML = html;

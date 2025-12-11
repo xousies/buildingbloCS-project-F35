@@ -1,11 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <title>Update Missing Person - Admin</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/edit.js" defer></script>
 </head>
+
 <body>
-    
+    <!-- NAVIGATION -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <div class="logo-circle"></div>
+            <span class="app-name">MissingLink</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">Missing Persons</a>
+            <a href="update_person.html" class="active">Update Record</a>
+        </nav>
+
+        <div class="nav-right">
+            <div class="logo-circle"></div>
+        </div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="header update-header">
+        <h1 class="page-title page-title-update">UPDATE MISSING PERSON</h1>
+        <p class="update-subtitle">
+            Edit this record to keep information accurate and up to date.
+        </p>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="update-main">
+
+        <div id="message" style="margin: 0 0 10px; color: red;"></div>
+
+        <form id="updatePersonForm" class="form-wrapper">
+
+            <!-- BASIC INFORMATION -->
+            <section class="form-section">
+                <h2 class="section-title">Basic Information</h2>
+
+                <div class="basic-grid">
+                    <div class="form-field">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" maxlength="100" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="0" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="Missing">Missing</option>
+                            <option value="Found">Found</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="dateMissing">Date Missing</label>
+                        <input type="date" id="dateMissing" name="dateMissing" required />
+                    </div>
+                </div>
+            </section>
+
+            <!-- LAST SEEN INFORMATION -->
+            <section class="form-section">
+                <h2 class="section-title">Last Seen Information</h2>
+
+                <div class="basic-grid">
+                    <div class="form-field">
+                        <label for="lastSeen">Last Seen Location</label>
+                        <input type="text" id="lastSeen" name="lastSeen" maxlength="150"
+                            placeholder="e.g. Bedok MRT Station" />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="lastSeenLat">Latitude (optional)</label>
+                        <input type="number" id="lastSeenLat" name="lastSeenLat" step="0.000001"
+                            placeholder="e.g. 1.324500" />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="lastSeenLng">Longitude (optional)</label>
+                        <input type="number" id="lastSeenLng" name="lastSeenLng" step="0.000001"
+                            placeholder="e.g. 103.930100" />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="clothing">Clothing / Identifying Items</label>
+                        <input type="text" id="clothing" name="clothing" maxlength="150"
+                            placeholder="e.g. White t-shirt, black shorts" />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="contact">Contact / Hotline</label>
+                        <input type="text" id="contact" name="contact" maxlength="150"
+                            placeholder="e.g. Missing Persons Unit: 1800-123-4567" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADDITIONAL DESCRIPTION -->
+            <section class="form-section">
+                <h2 class="section-title">Additional Description</h2>
+
+                <div class="form-field">
+                    <label for="description">Details</label>
+                    <textarea id="description" name="description" rows="4" maxlength="400"
+                        placeholder="Any extra information that may help identify this person."></textarea>
+                </div>
+            </section>
+
+            <!-- PHOTO & ACTIONS -->
+            <section class="form-section">
+                <h2 class="section-title">Missing Person Photo</h2>
+
+                <div class="form-field">
+                    <label>Photo</label>
+                    <div class="image-upload-box" id="imageUploadBox">
+                        <span class="upload-placeholder">Upload photo of missing person</span>
+                    </div>
+
+                    <!-- hidden base64 field -->
+                    <input type="hidden" id="photoBase64" name="photoBase64" />
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="btn-submit-primary">Update Record</button>
+
+                    <button type="button" class="btn-back-secondary" onclick="window.location.href='index.html'">
+                        Cancel
+                    </button>
+                </div>
+            </section>
+
+        </form>
+    </main>
+
+    <!-- CONFIRM UPDATE MODAL -->
+    <div id="confirmModal" class="modal-overlay hidden">
+        <div class="modal">
+            <p>Are you sure you want to update this missing person’s details?</p>
+            <div class="modal-actions">
+                <button type="button" id="confirmUpdateBtn" class="btn-update-main">Yes, update</button>
+                <button type="button" id="cancelUpdateBtn" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal">
+            <p>Record updated successfully.</p>
+            <div class="modal-actions">
+                <button type="button" id="successOkBtn" class="btn-update-main">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NO CHANGES MODAL -->
+    <div id="noChangesModal" class="modal-overlay hidden">
+        <div class="modal">
+            <p>No changes were made. Redirect back to the main page?</p>
+            <div class="modal-actions">
+                <button type="button" id="noChangesConfirmBtn" class="btn-update-main">
+                    Yes, redirect back
+                </button>
+                <button type="button" id="noChangesCancelBtn" class="btn-cancel">
+                    Stay on this page
+                </button>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
