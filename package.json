@@ -1,0 +1,23 @@
+{
+  "name": "buildingblocs-project",
+  "version": "1.0.0",
+  "description": "Project for SMU BuildingBloCS Hackathon 2025",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xousies/buildingbloCS-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xousies/buildingbloCS-project/issues"
+  },
+  "homepage": "https://github.com/xousies/buildingbloCS-project#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

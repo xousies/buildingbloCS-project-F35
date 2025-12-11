@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Tan Wei Ming",
+    "age": 17,
+    "gender": "Male",
+    "lastSeen": "Bedok MRT Station",
+    "lastSeenCoords": {
+      "lat": 1.3245,
+      "lng": 103.9301
+    },
+    "dateMissing": "2025-01-10",
+    "description": "Last seen wearing a white t-shirt, black shorts, and carrying a blue sling bag. Reportedly heading home after school but never arrived.",
+    "clothing": "White t-shirt, black shorts, blue sling bag",
+    "photoBase64": "",
+    "contact": "Missing Persons Unit: 1800-123-4567",
+    "status": "Missing",
+    "createdAt": "2025-01-11T09:32:15.000Z",
+    "id": "1736578335000123"
+  },
+  {
+    "name": "Nur Aisyah Binte Rahman",
+    "age": 22,
+    "gender": "Female",
+    "lastSeen": "Jurong Point Mall",
+    "lastSeenCoords": {
+      "lat": 1.3392,
+      "lng": 103.7064
+    },
+    "dateMissing": "2025-01-08",
+    "description": "Last seen leaving a cafe inside Jurong Point. Wearing a beige hoodie, jeans, and carrying a canvas tote bag.",
+    "clothing": "Beige hoodie, jeans, canvas tote bag",
+    "photoBase64": "",
+    "contact": "Missing Persons Unit: 1800-123-4567",
+    "status": "Missing",
+    "createdAt": "2025-01-11T10:05:40.000Z",
+    "id": "1736580340000456"
+  }
+]

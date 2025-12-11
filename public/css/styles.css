@@ -1,0 +1,540 @@
+/* ===========================
+   GLOBAL THEME
+   =========================== */
+
+:root {
+  --bg-main: #0f172a;        /* dark navy header / page bg */
+  --bg-soft: #111827;        /* slightly lighter than main */
+  --bg-surface: #f9fafb;     /* cards / content background */
+  --bg-card: #ffffff;
+  --bg-badge-missing: #fee2e2;
+  --bg-badge-found: #dcfce7;
+
+  --primary: #2563eb;        /* strong blue */
+  --primary-soft: #dbeafe;
+  --accent: #f97316;         /* orange accent */
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-on-dark: #f9fafb;
+
+  --border-soft: #e5e7eb;
+  --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: var(--bg-soft);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* ===========================
+   TOP NAVIGATION
+   =========================== */
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background: linear-gradient(90deg, #020617, #111827);
+  color: var(--text-on-dark);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.5);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(148, 163, 184, 0.6);
+  background: radial-gradient(circle at 30% 20%, #38bdf8, #0f172a);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+}
+
+.app-name {
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.nav-links a.active {
+  background: var(--primary);
+  color: #eff6ff;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-logout {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: rgba(148, 163, 184, 0.2);
+  border-color: #e5e7eb;
+}
+
+/* ===========================
+   PAGE HEADER
+   =========================== */
+
+.header {
+  text-align: center;
+  padding: 30px 16px 18px;
+  background: linear-gradient(to bottom, #020617, #111827 55%, #02061700);
+  color: var(--text-on-dark);
+}
+
+.page-title {
+  font-size: 1.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+
+/* Simple filters row (optional later) */
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.search-box,
+.select-wrapper {
+  background-color: rgba(15, 23, 42, 0.8);
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 230px;
+}
+
+.search-box input,
+.select-wrapper select {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
+/* ===========================
+   MAIN CONTENT
+   =========================== */
+
+main {
+  background: radial-gradient(circle at top, #1e293b 0, #020617 40%, #020617);
+}
+
+/* Grid for cards */
+
+.cards-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ===========================
+   PERSON CARD (reuses .pet-* names)
+   =========================== */
+
+.pet-card {
+  background-color: var(--bg-card);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--border-soft);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.pet-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+  border-color: var(--primary-soft);
+}
+
+.pet-image-placeholder {
+  width: 100%;
+  height: 190px;
+  border-radius: 14px;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pet-image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-info {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.pet-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.pet-info p {
+  margin-bottom: 3px;
+  font-size: 0.9rem;
+}
+
+.pet-info p strong {
+  font-weight: 600;
+}
+
+/* Status + small info row */
+
+.posted-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Status badge */
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #991b1b;
+  background-color: var(--bg-badge-missing);
+}
+
+.status-badge.status-found {
+  color: #166534;
+  background-color: var(--bg-badge-found);
+}
+
+/* Card actions */
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-update,
+.btn-delete {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
+}
+
+.btn-update {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+}
+
+.btn-update:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-delete:hover {
+  background-color: #fecaca;
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   MAP CONTAINER
+   =========================== */
+
+.map-container {
+  width: 100%;
+  height: 260px;
+  border-radius: 14px;
+  margin-top: 12px;
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
+}
+
+/* ===========================
+   FORMS (Create / Update Person)
+   =========================== */
+
+.update-main,
+.add-person-main {
+  max-width: 1100px;
+  margin: 24px auto 48px;
+  padding: 0 24px;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-section {
+  background-color: var(--bg-card);
+  border-radius: 14px;
+  padding: 18px 20px 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-main);
+}
+
+.basic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.form-field label {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 7px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.85rem;
+  outline: none;
+  background-color: #f9fafb;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--primary-soft);
+  box-shadow: 0 0 0 1px var(--primary-soft);
+  background-color: #ffffff;
+}
+
+.form-field textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+/* Form buttons */
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btn-submit-primary {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background-color: var(--primary);
+  color: #f9fafb;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-submit-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-back-secondary,
+.btn-cancel {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background-color: #ffffff;
+  color: var(--text-main);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-back-secondary:hover,
+.btn-cancel:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* ===========================
+   MODAL (for delete confirm, etc.)
+   =========================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  max-width: 360px;
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
+}
+
+.modal h2 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.modal p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.modal-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===========================
+   RESPONSIVE ADJUSTMENTS
+   =========================== */
+
+@media (max-width: 900px) {
+  .top-nav {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .cards-grid {
+    padding: 20px 16px 32px;
+  }
+
+  .update-main,
+  .add-person-main {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-right .logo-circle {
+    display: none;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
+    letter-spacing: 0.18em;
+  }
+}
