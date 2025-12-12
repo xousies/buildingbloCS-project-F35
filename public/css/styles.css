@@ -1,18 +1,14 @@
-/* ===========================
-   GLOBAL THEME
-   =========================== */
-
 :root {
-  --bg-main: #0f172a;        /* dark navy header / page bg */
-  --bg-soft: #111827;        /* slightly lighter than main */
-  --bg-surface: #f9fafb;     /* cards / content background */
+  --bg-main: #0f172a;        
+  --bg-soft: #111827;        
+  --bg-surface: #f9fafb;     
   --bg-card: #ffffff;
   --bg-badge-missing: #fee2e2;
   --bg-badge-found: #dcfce7;
 
-  --primary: #2563eb;        /* strong blue */
+  --primary: #2563eb;        
   --primary-soft: #dbeafe;
-  --accent: #f97316;         /* orange accent */
+  --accent: #f97316;         
 
   --text-main: #111827;
   --text-muted: #6b7280;
@@ -36,9 +32,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===========================
-   TOP NAVIGATION
-   =========================== */
+
 
 .top-nav {
   display: flex;
@@ -117,9 +111,6 @@ body {
   border-color: #e5e7eb;
 }
 
-/* ===========================
-   PAGE HEADER
-   =========================== */
 
 .header {
   text-align: center;
@@ -140,7 +131,7 @@ body {
   color: #cbd5f5;
 }
 
-/* Simple filters row (optional later) */
+
 .filters {
   display: flex;
   justify-content: center;
@@ -174,9 +165,7 @@ body {
   color: #9ca3af;
 }
 
-/* ===========================
-   MAIN CONTENT
-   =========================== */
+
 
 main {
   background: radial-gradient(circle at top, #1e293b 0, #020617 40%, #020617);
@@ -193,9 +182,7 @@ main {
   gap: 24px;
 }
 
-/* ===========================
-   PERSON CARD
-   =========================== */
+
 
 .person-card {
   background-color: var(--bg-card);
@@ -320,9 +307,6 @@ main {
   transform: translateY(-1px);
 }
 
-/* ===========================
-   MAP CONTAINER
-   =========================== */
 
 .map-container {
   width: 100%;
@@ -334,9 +318,6 @@ main {
   box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
 }
 
-/* ===========================
-   FORMS (Create / Update Person)
-   =========================== */
 
 .update-main,
 .add-person-main {
@@ -454,9 +435,6 @@ main {
   border-color: #d1d5db;
 }
 
-/* ===========================
-   MODAL (for delete confirm, etc.)
-   =========================== */
 
 .modal-overlay {
   position: fixed;
@@ -499,9 +477,7 @@ main {
   display: none;
 }
 
-/* ===========================
-   RESPONSIVE ADJUSTMENTS
-   =========================== */
+
 
 @media (max-width: 900px) {
   .top-nav {

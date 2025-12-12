@@ -19,7 +19,7 @@ function openDeleteModal(personId) {
   confirmBtn.disabled = false;
   confirmBtn.textContent = "Verify";
 
-  // reset timer state
+
   if (deleteTimer) clearInterval(deleteTimer);
   deleteTimer = null;
   secondsLeft = 5;
@@ -43,7 +43,6 @@ async function verifyPasswordThenCountdown() {
     return;
   }
 
-  // Call backend verify endpoint (does NOT delete)
   const res = await fetch(`/persons/${deleteTargetId}/verify-delete`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -57,7 +56,6 @@ async function verifyPasswordThenCountdown() {
     return;
   }
 
-  // Password correct → start cancellable 5s countdown
   qs("deletePassword").disabled = true;
 
   const confirmBtn = qs("deleteConfirmBtn");
@@ -82,7 +80,6 @@ async function verifyPasswordThenCountdown() {
 }
 
 async function actuallyDelete(password) {
-  // Send DELETE to backend
   const res = await fetch(`/persons/${deleteTargetId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -101,11 +98,11 @@ async function actuallyDelete(password) {
 
   closeDeleteModal();
 
-  // Refresh the list
+
   if (typeof viewPersons === "function") viewPersons();
 }
 
-// This is what your Delete button calls from view.js
+
 window.deletePerson = function (personId) {
   openDeleteModal(personId);
 };
@@ -117,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   qs("deleteCancelBtn").addEventListener("click", closeDeleteModal);
   qs("deleteConfirmBtn").addEventListener("click", verifyPasswordThenCountdown);
 
-  // optional: click outside modal closes
+
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) closeDeleteModal();
   });

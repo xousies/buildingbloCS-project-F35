@@ -2,20 +2,20 @@ let pendingPersonData = null;
 let countdownTimer = null;
 let countdownValue = 5;
 
-// Run after the DOM is ready
+
 document.addEventListener("DOMContentLoaded", function () {
   const uploadBox = document.getElementById("imageUploadBox");
   const imageHiddenInput = document.getElementById("photoBase64");
   const form = document.getElementById("createPersonForm");
 
-  // Date Missing cannot be after today
+
   const dateMissingInput = document.getElementById("dateMissing");
   if (dateMissingInput) {
     const today = new Date().toISOString().split("T")[0];
     dateMissingInput.max = today;
   }
 
-  // ========== IMAGE UPLOAD ==========
+
   if (uploadBox) {
     uploadBox.addEventListener("click", function () {
       const fileInput = document.createElement("input");
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const file = fileInput.files[0];
         if (!file) return;
 
-        // ✅ Max 2MB
+        
         const maxSizeBytes = 2 * 1024 * 1024;
         if (file.size > maxSizeBytes) {
           alert("Image is too large. Please upload a file smaller than 2MB.");
@@ -42,10 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.onload = function () {
           const base64 = reader.result;
 
-          // store base64
+          
           imageHiddenInput.value = base64;
 
-          // preview
+         
           uploadBox.innerHTML =
             '<img src="' +
             base64 +
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ========== FORM SUBMIT HANDLER ==========
+
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -67,15 +67,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ================== HELPER 1: Collect data ==================
+
 function collectPersonData() {
   const jsonData = {};
 
   jsonData.name = document.getElementById("name").value.trim();
-  jsonData.age = document.getElementById("age").value; // keep string for now, convert later
+  jsonData.age = document.getElementById("age").value; 
   jsonData.gender = document.getElementById("gender").value;
 
-  // optional
   jsonData.status = document.getElementById("status")
     ? document.getElementById("status").value
     : "Missing";
@@ -91,15 +90,15 @@ function collectPersonData() {
   jsonData.contact = document.getElementById("contact").value.trim();
   jsonData.description = document.getElementById("description").value.trim();
 
-  // Image Base64
+
   jsonData.photoBase64 = document.getElementById("photoBase64").value;
 
   return jsonData;
 }
 
-// ================== HELPER 2: Validate ==================
+
 function validatePersonData(jsonData) {
-  // Required fields check
+ 
   if (
     jsonData.name === "" ||
     jsonData.age === "" ||
@@ -110,28 +109,28 @@ function validatePersonData(jsonData) {
     return false;
   }
 
-  // Name: letters + spaces + apostrophe + hyphen (supports common SG names)
+
   const namePattern = /^[A-Za-z\s'-]+$/;
   if (!namePattern.test(jsonData.name)) {
     alert("Full Name can only contain letters, spaces, apostrophes (') and hyphens (-).");
     return false;
   }
 
-  // Age: 0 - 120 (adjust if you want)
+ 
   const ageNum = Number(jsonData.age);
   if (Number.isNaN(ageNum) || ageNum < 0 || ageNum > 120) {
     alert("Please enter a valid age between 0 and 120.");
     return false;
   }
 
-  // Date Missing not in future
+  
   const today = new Date().toISOString().split("T")[0];
   if (jsonData.dateMissing > today) {
     alert("Date Missing cannot be in the future.");
     return false;
   }
 
-  // Height/Weight validation: allow blank OR valid ranges
+  
 if (jsonData.heightCm !== "") {
   const h = Number(jsonData.heightCm);
   if (Number.isNaN(h) || h < 30 || h > 250) {
@@ -149,7 +148,7 @@ if (jsonData.weightKg !== "") {
 }
 
 
-  // Optional: basic phone/hotline sanity check (allow numbers + spaces + + - () )
+  
   if (jsonData.contact && jsonData.contact.trim() !== "") {
     const contactPattern = /^[0-9\s+\-()]{6,}$/;
     if (!contactPattern.test(jsonData.contact)) {
@@ -158,7 +157,7 @@ if (jsonData.weightKg !== "") {
     }
   }
 
-  // Image required (you can make it optional if you want)
+  
   if (!jsonData.photoBase64 || jsonData.photoBase64.trim() === "") {
     alert("Please upload a photo before submitting.");
     return false;
@@ -167,7 +166,7 @@ if (jsonData.weightKg !== "") {
   return true;
 }
 
-// ================== COUNTDOWN SNACKBAR ==================
+
 function startCountdownSnackbar() {
   const jsonData = collectPersonData();
   if (!validatePersonData(jsonData)) return;
@@ -175,11 +174,11 @@ function startCountdownSnackbar() {
   pendingPersonData = jsonData;
   countdownValue = 5;
 
-  // Remove old snackbar if exists
+  
   const old = document.getElementById("countdownSnackbar");
   if (old) old.remove();
 
-  // Create snackbar
+
   const snackbar = document.createElement("div");
   snackbar.id = "countdownSnackbar";
   snackbar.style.position = "fixed";
@@ -218,7 +217,7 @@ function startCountdownSnackbar() {
   const countdownText = document.getElementById("snackbarCountdownText");
   const cancelBtn = document.getElementById("snackbarCancelBtn");
 
-  // Cancel countdown
+  
   cancelBtn.addEventListener("click", () => {
     clearInterval(countdownTimer);
     countdownTimer = null;
@@ -226,7 +225,7 @@ function startCountdownSnackbar() {
     alert("Submission cancelled. You can continue editing.");
   });
 
-  // Start countdown
+  
   countdownTimer = setInterval(() => {
     countdownValue--;
     countdownText.textContent = ` in ${countdownValue} seconds…`;
@@ -234,18 +233,18 @@ function startCountdownSnackbar() {
     if (countdownValue <= 0) {
       clearInterval(countdownTimer);
       snackbar.remove();
-      addMissingPerson(pendingPersonData); // Final send
+      addMissingPerson(pendingPersonData);
     }
   }, 1000);
 }
 
-// FINAL SEND FUNCTION
+
 function addMissingPerson(jsonData) {
   let response = "";
 
   const request = new XMLHttpRequest();
 
-  // ✅ Change this route if your backend uses a different endpoint
+
   request.open("POST", "/add-missing-person", true);
 
   request.setRequestHeader("Content-Type", "application/json");
@@ -261,11 +260,11 @@ function addMissingPerson(jsonData) {
 
     console.log(response);
 
-    // Same logic as your pet code: if no message => success
+
     if (response.message === undefined) {
       alert("Record created successfully: " + jsonData.name + "!");
 
-      // Clear form
+
       const form = document.getElementById("createPersonForm");
       form.reset();
       document.getElementById("photoBase64").value = "";

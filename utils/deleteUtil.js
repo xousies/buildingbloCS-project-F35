@@ -3,10 +3,8 @@ const path = require("path");
 
 const PERSON_FILE = path.join(__dirname, "missing_person.json");
 
-// Put your password in ENV if possible. For hackathon demo, fallback is fine.
 const ADMIN_DELETE_PASSWORD = process.env.ADMIN_DELETE_PASSWORD || "1234";
 
-// POST /persons/:id/verify-delete
 async function verifyDelete(req, res) {
   const { password } = req.body || {};
   if (!password) return res.status(400).json({ message: "Password required." });
@@ -18,7 +16,7 @@ async function verifyDelete(req, res) {
   return res.status(200).json({ message: "Password verified." });
 }
 
-// DELETE /persons/:id
+
 async function deletePerson(req, res) {
   const personId = req.params.id;
   const { password } = req.body || {};
