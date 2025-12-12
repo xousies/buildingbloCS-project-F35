@@ -7,9 +7,9 @@ MissingLink is a web application designed to centralise missing-person informati
 - Displays all records in a clean, card-based layout  
 - Includes name, age, gender, last-seen details, status (Missing/Found), and photo  
 - “Found” status appears in green; “Missing” appears in red  
-- Buttons for editing and deleting records
+- Buttons for editing and deleting records  
 
- # Create Missing Person Record
+# Create Missing Person Record
 
 - Allows user to add a new missing person into the system
 
@@ -53,7 +53,7 @@ Update Existing Records
 
 ## STEP 2
 node index.js
-- this is to run the application, once successfully fun you should see MissingLink running at: http://localhost:5051 inside your terminal
+- this is to run the application, once successfully fun you should see MissingLink running at: http://localhost:5050 inside your terminal
 
 ## Step 3
-- click on http://localhost:5051 to open the application and it should run 
+- click on http://localhost:5050 to open the application and it should run 
