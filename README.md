@@ -30,12 +30,12 @@ Update Existing Records
 - to run our project MissingLink locally, open up the vscode terminal for our project then move on to step 1
 
 ## STEP 1
-npm init - y
-npm install express
+- npm init - y
+- npm install express
 
 ## STEP 2
 node index.js
 - this is to run the application, once successfully fun you should see MissingLink running at: http://localhost:5050 inside your terminal
 
 ## Step 3
-click on http://localhost:5050 to open the application and it should run 
+- click on http://localhost:5050 to open the application and it should run 
