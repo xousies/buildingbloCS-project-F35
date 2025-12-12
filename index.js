@@ -6,11 +6,9 @@ const app = express();
 const PORT = process.env.PORT || 5051;
 const startPage = "index.html";
 
-// Parse forms + JSON
 app.use(bodyParser.urlencoded({ limit: "2mb", extended: true }));
 app.use(bodyParser.json({ limit: "2mb" }));
 
-// Serve ALL public files at root
 app.use(express.static(path.join(__dirname, "public")));
 
 // Home page

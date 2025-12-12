@@ -1,10 +1,8 @@
 const fs = require("fs").promises;
 const path = require("path");
 
-// Path to your missing persons "database"
 const PERSON_FILE = path.join(__dirname, "missing_person.json");
 
-// GET /persons/:id
 async function getPersonDetails(req, res) {
   const personId = req.params.id;
 
@@ -30,7 +28,6 @@ async function getPersonDetails(req, res) {
   }
 }
 
-// PUT /persons/:id
 async function updatePerson(req, res) {
   const personId = req.params.id;
   const updates = req.body || {};
@@ -47,7 +44,6 @@ async function updatePerson(req, res) {
 
     const existingPerson = allPersons[index];
 
-    // Fields that can be overwritten directly
     const updatableFields = [
   "name",
   "age",

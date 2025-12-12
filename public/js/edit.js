@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmModal = document.getElementById("confirmModal");
   const successModal = document.getElementById("successModal");
 
-  // No-changes modal elements
   const noChangesModal = document.getElementById("noChangesModal");
   const noChangesConfirmBtn = document.getElementById("noChangesConfirmBtn");
   const noChangesCancelBtn = document.getElementById("noChangesCancelBtn");
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadBox = document.querySelector(".image-upload-box");
   const imageHiddenInput = document.getElementById("photoBase64");
 
-  /** IMAGE UPLOAD **/
   if (uploadBox && imageHiddenInput) {
     uploadBox.addEventListener("click", () => {
       const fileInput = document.createElement("input");
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const file = fileInput.files[0];
         if (!file) return;
 
-        // Max 2MB
+      
         if (file.size > 2 * 1024 * 1024) {
           alert("Image too large. Max 2MB allowed.");
           return;
@@ -66,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /** LOAD EXISTING MISSING PERSON DATA **/
   fetch(`/persons/${currentPersonId}`)
     .then((res) => res.json())
     .then((person) => fillForm(person))
@@ -76,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  /** FORM SUBMIT **/
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -86,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmModal.classList.remove("hidden");
   });
 
-  /** CONFIRM MODAL BUTTONS **/
   confirmUpdateBtn.addEventListener("click", () => {
     confirmModal.classList.add("hidden");
     performUpdate();
@@ -98,12 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "index.html";
   });
 
-  /** SUCCESS MODAL BUTTON **/
   successOkBtn.addEventListener("click", () => {
     setupRedirectCountdown();
   });
 
-  /** NO-CHANGES MODAL BUTTONS **/
   if (noChangesCancelBtn) {
     noChangesCancelBtn.addEventListener("click", () => {
       noChangesModal.classList.add("hidden");
@@ -112,16 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (noChangesConfirmBtn) {
     noChangesConfirmBtn.addEventListener("click", () => {
-      // Only allow click after countdown finishes
       if (noChangesConfirmBtn.disabled) return;
       window.location.href = "index.html";
     });
   }
 
-  /** TRACK UNSAVED CHANGES **/
   attachChangeListeners(form);
 
-  /** BROWSER LEAVE WARNING **/
   window.addEventListener("beforeunload", function (e) {
     if (!hasUnsavedChanges) return;
     e.preventDefault();
@@ -129,9 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/** FILL FORM WITH EXISTING MISSING PERSON DATA **/
 function fillForm(person) {
-  // Simple direct mappings
   const mapping = {
     name: person.name,
     age: person.age,
@@ -156,7 +144,6 @@ function fillForm(person) {
 
 
 
-  // Image
   if (person.photoBase64) {
     const uploadBox = document.querySelector(".image-upload-box");
     const imageHiddenInput = document.getElementById("photoBase64");
@@ -170,7 +157,6 @@ function fillForm(person) {
   hasUnsavedChanges = false;
 }
 
-/** MARK FORM AS DIRTY WHEN USER EDITS **/
 function attachChangeListeners(form) {
   const fields = form.querySelectorAll("input, select, textarea");
   fields.forEach((field) => {
@@ -179,7 +165,7 @@ function attachChangeListeners(form) {
   });
 }
 
-/** READ CURRENT FORM DATA INTO OBJECT **/
+
 function getCurrentFormData() {
   const formData = new FormData(document.getElementById("updatePersonForm"));
   const data = {};
@@ -187,7 +173,6 @@ function getCurrentFormData() {
   return data;
 }
 
-/** CHECK IF FORM CHANGED COMPARED TO ORIGINAL **/
 function formDataChanged(current, original) {
   for (const key of Object.keys({ ...current, ...original })) {
     if ((current[key] || "") !== (original[key] || "")) {
@@ -197,7 +182,6 @@ function formDataChanged(current, original) {
   return false;
 }
 
-/** VALIDATION RULES (for Missing Person) **/
 function validateForm() {
   const msg = document.getElementById("message");
   msg.textContent = "";
@@ -210,16 +194,15 @@ function validateForm() {
   const gender = get("gender");
   const dateMissing = get("dateMissing");
   const heightCm = get("heightCm");
-const weightKg = get("weightKg");
+  const weightKg = get("weightKg");
 
 
-  // Required fields
   if (!name || !age || !gender || !dateMissing) {
     msg.textContent = "Please fill in all required fields.";
     return false;
   }
 
-  // Age validation
+  
   const ageNum = Number(age);
   if (isNaN(ageNum) || ageNum <= 0 || ageNum > 120) {
     msg.textContent = "Please enter a valid age.";
@@ -244,7 +227,6 @@ if (weightKg !== "") {
   }
 }
 
-  // Date missing cannot be in the future
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const missingDate = new Date(dateMissing);
@@ -253,7 +235,7 @@ if (weightKg !== "") {
     return false;
   }
 
-  // No changes → show modal and stop normal flow
+  
   const current = getCurrentFormData();
   if (originalFormData && !formDataChanged(current, originalFormData)) {
     showNoChangesModal();
@@ -263,13 +245,12 @@ if (weightKg !== "") {
   return true;
 }
 
-/** SHOW "NO CHANGES" MODAL WITH 3-SECOND COUNTDOWN **/
 function showNoChangesModal() {
   const noChangesModal = document.getElementById("noChangesModal");
   const noChangesConfirmBtn = document.getElementById("noChangesConfirmBtn");
   if (!noChangesModal || !noChangesConfirmBtn) return;
 
-  // Form is identical to original → nothing unsaved
+  
   hasUnsavedChanges = false;
 
   noChangesModal.classList.remove("hidden");
@@ -292,7 +273,6 @@ function showNoChangesModal() {
   }, 1000);
 }
 
-/** 3-SECOND COUNTDOWN BEFORE "YES, UPDATE" IS CLICKABLE **/
 function setupConfirmCountdown(confirmUpdateBtn) {
   const originalText =
     confirmUpdateBtn.getAttribute("data-original-text") || "Yes, update";
@@ -314,7 +294,6 @@ function setupConfirmCountdown(confirmUpdateBtn) {
   }, 1000);
 }
 
-/** SEND UPDATE REQUEST TO BACKEND **/
 function performUpdate() {
   const msg = document.getElementById("message");
   const updates = getCurrentFormData();
@@ -341,7 +320,6 @@ function performUpdate() {
     });
 }
 
-/** AFTER SUCCESS: 3-SECOND REDIRECT COUNTDOWN **/
 function setupRedirectCountdown() {
   const successModal = document.getElementById("successModal");
   const successMsg = successModal.querySelector("p");

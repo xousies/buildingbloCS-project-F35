@@ -6,7 +6,6 @@ const DATA_FILE = path.join(__dirname, "missing_person.json");
 function viewPersons(req, res) {
   fs.readFile(DATA_FILE, "utf8", (err, data) => {
     if (err) {
-      // If file not found, just return an empty array instead of crashing
       if (err.code === "ENOENT") {
         console.warn("missing_person.json not found. Returning empty list.");
         return res.status(200).json([]);

@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- NAVIGATION -->
     <header class="top-nav">
         <div class="nav-left">
             <div class="logo-circle"></div>
@@ -26,7 +25,6 @@
         </div>
     </header>
 
-    <!-- PAGE BANNER -->
     <section class="header update-header">
         <h1 class="page-title page-title-update">UPDATE MISSING PERSON</h1>
         <p class="update-subtitle">
@@ -34,14 +32,12 @@
         </p>
     </section>
 
-    <!-- MAIN CONTENT -->
     <main class="update-main">
 
         <div id="message" style="margin: 0 0 10px; color: red;"></div>
 
         <form id="updatePersonForm" class="form-wrapper">
 
-            <!-- BASIC INFORMATION -->
             <section class="form-section">
                 <h2 class="section-title">Basic Information</h2>
 
@@ -81,7 +77,6 @@
                 </div>
             </section>
 
-            <!-- LAST SEEN INFORMATION -->
             <section class="form-section">
                 <h2 class="section-title">Last Seen Information</h2>
 
@@ -117,7 +112,6 @@
                 </div>
             </section>
 
-            <!-- ADDITIONAL DESCRIPTION -->
             <section class="form-section">
                 <h2 class="section-title">Additional Description</h2>
 
@@ -128,7 +122,6 @@
                 </div>
             </section>
 
-            <!-- PHOTO & ACTIONS -->
             <section class="form-section">
                 <h2 class="section-title">Missing Person Photo</h2>
 
@@ -138,7 +131,6 @@
                         <span class="upload-placeholder">Upload photo of missing person</span>
                     </div>
 
-                    <!-- hidden base64 field -->
                     <input type="hidden" id="photoBase64" name="photoBase64" />
                 </div>
 
@@ -154,7 +146,6 @@
         </form>
     </main>
 
-    <!-- CONFIRM UPDATE MODAL -->
     <div id="confirmModal" class="modal-overlay hidden">
         <div class="modal">
             <p>Are you sure you want to update this missing person’s details?</p>
@@ -165,7 +156,6 @@
         </div>
     </div>
 
-    <!-- SUCCESS MODAL -->
     <div id="successModal" class="modal-overlay hidden">
         <div class="modal">
             <p>Record updated successfully.</p>
@@ -175,7 +165,6 @@
         </div>
     </div>
 
-    <!-- NO CHANGES MODAL -->
     <div id="noChangesModal" class="modal-overlay hidden">
         <div class="modal">
             <p>No changes were made. Redirect back to the main page?</p>
