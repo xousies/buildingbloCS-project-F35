@@ -139,6 +139,9 @@ function fillForm(person) {
     status: person.status || "Missing",
     dateMissing: person.dateMissing,
     lastSeen: person.lastSeen,
+    heightCm: person.heightCm ?? "",
+    weightKg: person.weightKg ?? "",
+
     clothing: person.clothing,
     contact: person.contact,
     description: person.description,
@@ -151,17 +154,7 @@ function fillForm(person) {
     }
   });
 
-  // Coords: lastSeenCoords.lat / lng → lastSeenLat / lastSeenLng
-  if (person.lastSeenCoords) {
-    const latField = document.getElementById("lastSeenLat");
-    const lngField = document.getElementById("lastSeenLng");
-    if (latField && person.lastSeenCoords.lat !== undefined) {
-      latField.value = person.lastSeenCoords.lat;
-    }
-    if (lngField && person.lastSeenCoords.lng !== undefined) {
-      lngField.value = person.lastSeenCoords.lng;
-    }
-  }
+
 
   // Image
   if (person.photoBase64) {
@@ -216,6 +209,9 @@ function validateForm() {
   const age = get("age");
   const gender = get("gender");
   const dateMissing = get("dateMissing");
+  const heightCm = get("heightCm");
+const weightKg = get("weightKg");
+
 
   // Required fields
   if (!name || !age || !gender || !dateMissing) {
@@ -229,6 +225,24 @@ function validateForm() {
     msg.textContent = "Please enter a valid age.";
     return false;
   }
+
+
+
+  if (heightCm !== "") {
+  const h = Number(heightCm);
+  if (isNaN(h) || h < 30 || h > 250) {
+    msg.textContent = "Height must be between 30 and 250 cm.";
+    return false;
+  }
+}
+
+if (weightKg !== "") {
+  const w = Number(weightKg);
+  if (isNaN(w) || w < 1 || w > 400) {
+    msg.textContent = "Weight must be between 1 and 400 kg.";
+    return false;
+  }
+}
 
   // Date missing cannot be in the future
   const today = new Date();

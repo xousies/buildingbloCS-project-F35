@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 5051;
 const startPage = "index.html";
 
 // Parse forms + JSON
@@ -21,6 +21,10 @@ app.get("/", (req, res) => {
 // VIEW ALL MISSING PERSONS
 const { viewPersons } = require("./utils/viewutil");
 app.get("/view-persons", viewPersons);
+
+// CREATE NEW MISSING PERSON
+const { addMissingPerson } = require("./utils/createUtil");
+app.post("/add-missing-person", addMissingPerson);
 
 // VIEW + UPDATE INDIVIDUAL PERSON DETAILS
 const { getPersonDetails, updatePerson } = require("./utils/editUtil");

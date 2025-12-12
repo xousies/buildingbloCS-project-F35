@@ -49,43 +49,26 @@ async function updatePerson(req, res) {
 
     // Fields that can be overwritten directly
     const updatableFields = [
-      "name",
-      "age",
-      "gender",
-      "lastSeen",
-      "dateMissing",
-      "description",
-      "clothing",
-      "contact",
-      "photoBase64",
-      "status",
-    ];
+  "name",
+  "age",
+  "gender",
+  "lastSeen",
+  "heightCm",
+  "weightKg",
+  "dateMissing",
+  "description",
+  "clothing",
+  "contact",
+  "photoBase64",
+  "status",
+];
+
 
     updatableFields.forEach((field) => {
       if (Object.prototype.hasOwnProperty.call(updates, field)) {
         existingPerson[field] = updates[field];
       }
     });
-
-    // Handle coordinates: lastSeenLat + lastSeenLng → lastSeenCoords
-    const hasLat = Object.prototype.hasOwnProperty.call(updates, "lastSeenLat");
-    const hasLng = Object.prototype.hasOwnProperty.call(updates, "lastSeenLng");
-
-    if (hasLat || hasLng) {
-      const lat =
-        hasLat && updates.lastSeenLat !== ""
-          ? Number(updates.lastSeenLat)
-          : existingPerson.lastSeenCoords?.lat;
-      const lng =
-        hasLng && updates.lastSeenLng !== ""
-          ? Number(updates.lastSeenLng)
-          : existingPerson.lastSeenCoords?.lng;
-
-      existingPerson.lastSeenCoords = {
-        lat,
-        lng,
-      };
-    }
 
     allPersons[index] = existingPerson;
 
