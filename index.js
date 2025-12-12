@@ -27,6 +27,12 @@ const { getPersonDetails, updatePerson } = require("./utils/editUtil");
 app.get("/persons/:id", getPersonDetails);
 app.put("/persons/:id", updatePerson);
 
+// DELETE PERSON RECORDS WITH PASSWORD PROTECTION
+const { verifyDelete, deletePerson } = require("./utils/deleteUtil");
+app.post("/persons/:id/verify-delete", verifyDelete);
+app.delete("/persons/:id", deletePerson);
+
+
 // Start server
 const server = app.listen(PORT, () => {
   const address = server.address();

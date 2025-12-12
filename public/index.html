@@ -10,8 +10,36 @@
   <!-- JS to load and render cards -->
   <script src="js/view.js" defer></script>
   <!-- If you have a separate delete.js you can include it too -->
-  <!-- <script src="js/delete.js" defer></script> -->
+  <script src="js/delete.js" defer></script>
 </head>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay hidden" id="deleteModalOverlay">
+  <div class="modal">
+    <h2 id="deleteModalTitle">Confirm deletion</h2>
+    <p id="deleteModalDesc">Enter admin password to continue.</p>
+
+    <div style="margin-top:12px; text-align:left;">
+      <label for="deletePassword" style="font-size:0.85rem; font-weight:600;">Password</label>
+      <input
+        id="deletePassword"
+        type="password"
+        placeholder="Enter password"
+        style="width:100%; margin-top:6px; padding:10px; border-radius:10px; border:1px solid #e5e7eb;"
+      />
+      <p id="deleteError" style="margin-top:8px; font-size:0.85rem; color:#b91c1c;"></p>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" id="deleteCancelBtn">Cancel</button>
+      <button class="btn-submit-primary" id="deleteConfirmBtn">Verify</button>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <body>
   <!-- TOP NAV -->
