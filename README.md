@@ -9,6 +9,24 @@ MissingLink is a web application designed to centralise missing-person informati
 - “Found” status appears in green; “Missing” appears in red  
 - Buttons for editing and deleting records  
 
+# Create Missing Person Record
+
+- Allows user to add a new missing person into the system
+
+- Captures essential details such as name, age, gender, status, date missing, and last-seen location
+
+- Supports physical attributes including height and weight for easier identification
+
+- Includes clothing description, contact information, and additional remarks
+
+- Photo upload feature with live preview before submission
+
+- Input validation ensures required fields are completed and values are within realistic ranges
+
+- Countdown confirmation before submission to prevent accidental creation
+
+- Successfully created records are stored persistently in the local JSON database
+
 ## Update existing records
 Update Existing Records  
 - Edit name, age, gender, status, date missing, last-seen details, and more  
